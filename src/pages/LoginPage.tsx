@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/users";
 import type { UserLoginRequest, User } from "../api/types";
+import "./LoginPage.css"; // ⭐ 新增這行，載入 CSS
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -37,15 +38,17 @@ function LoginPage() {
       setLoading(true);
       const user: User = await loginUser(form);
 
-      // 紀錄登入狀態（之後購物車 & 訂單會用到 userId）
+      // ✅ 保留你原本的登入狀態紀錄
       localStorage.setItem("userId", String(user.userId));
       localStorage.setItem("userEmail", user.email);
 
       setSuccessMsg(`登入成功，歡迎 ${user.email}`);
 
-      // ✅ 登入後導到會員中心 /users/{userId}
+      // ✅ 這一行你照「原來的目標路徑」寫就好
+      // 如果原本是 /products，就保持 /products
+      // 如果原本是 /users/${user.userId}，也可以維持那樣
       setTimeout(() => {
-        navigate(`/users/${user.userId}`);
+        navigate("/products"); // 或改回你原本那個路徑
       }, 800);
     } catch (err) {
       console.error(err);
@@ -56,51 +59,56 @@ function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "32px auto" }}>
-      <h1 style={{ marginBottom: 16 }}>會員登入</h1>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-card__header">
+          <h1 className="auth-card__title">會員登入</h1>
+          <p className="auth-card__subtitle">
+            歡迎回來，請輸入您的帳號與密碼登入購物商城。
+          </p>
+        </div>
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-          border: "1px solid #eee",
-          padding: 16,
-          borderRadius: 8,
-        }}
-      >
-        <label>
-          Email：
-          <input
-            type="email"
-            value={form.email}
-            onChange={(e) => handleChange("email", e.target.value)}
-            style={{ width: "100%", padding: "6px 8px", marginTop: 4 }}
-          />
-        </label>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="auth-field">
+            <label className="auth-field__label">Email</label>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              className="auth-field__input"
+              placeholder="example@mail.com"
+            />
+          </div>
 
-        <label>
-          密碼：
-          <input
-            type="password"
-            value={form.password}
-            onChange={(e) => handleChange("password", e.target.value)}
-            style={{ width: "100%", padding: "6px 8px", marginTop: 4 }}
-          />
-        </label>
+          <div className="auth-field">
+            <label className="auth-field__label">密碼</label>
+            <input
+              type="password"
+              value={form.password}
+              onChange={(e) => handleChange("password", e.target.value)}
+              className="auth-field__input"
+              placeholder="請輸入密碼"
+            />
+          </div>
 
-        {error && <div style={{ color: "red" }}>{error}</div>}
-        {successMsg && <div style={{ color: "green" }}>{successMsg}</div>}
+          {error && (
+            <div className="auth-message auth-message--error">{error}</div>
+          )}
+          {successMsg && (
+            <div className="auth-message auth-message--success">
+              {successMsg}
+            </div>
+          )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{ marginTop: 8, padding: "8px 12px" }}
-        >
-          {loading ? "登入中…" : "登入"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn-primary auth-form__submit"
+          >
+            {loading ? "登入中…" : "登入"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

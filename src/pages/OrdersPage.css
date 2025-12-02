@@ -1,0 +1,153 @@
+/* 整頁容器：置中 + 有點間距 */
+.orders-page {
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 外層大卡片（像 Figma 的 panel） */
+.orders-card {
+  width: 100%;
+  max-width: 960px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  padding: 20px 24px 24px;
+  box-sizing: border-box;
+}
+
+/* 標題區 */
+.orders-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.orders-card__title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.orders-card__subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* 內容區 */
+.orders-card__body {
+  margin-top: 4px;
+}
+
+.orders-message {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.orders-message--error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.orders-empty {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* 訂單列表 */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 單筆訂單卡片 */
+.order-card {
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
+  background-color: #f9fafb;
+}
+
+.order-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.order-card__id {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.order-card__date {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.order-card__total {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary, #ff6b35);
+}
+
+/* 訂單內商品列表 */
+.order-card__items {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 8px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-item-row__image {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.order-item-row__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item-row__name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.order-item-row__meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* RWD */
+@media (max-width: 768px) {
+  .orders-card {
+    padding: 16px 14px 18px;
+  }
+
+  .orders-card__header {
+    flex-direction: column;
+  }
+
+  .order-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
