@@ -1,0 +1,31 @@
+:root {
+  /* 品牌主色：紅 + 橘 */
+  --color-brand-red: #d32f2f;
+  --color-brand-orange: #f57c00;
+
+  /* 輔助色系 */
+  --color-brand-light-orange: #fff3e0;
+  --color-brand-border: #ffe0b2;
+  --color-text-main: #333333;
+  --color-text-muted: #777777;
+  --color-page-bg: #fff8f2;
+}
+
+/* 全站基底樣式，可以微調字型、背景 */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--color-text-main);
+  background-color: var(--color-page-bg);
+}
+
+/* 讓 <a> 看起來乾淨一點 */
+a {
+  color: var(--color-brand-orange);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
