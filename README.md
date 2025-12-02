@@ -10,34 +10,28 @@
 🚀 主要功能 Features
 
 🔹 商品模組
-
-瀏覽商品列表
-
-關鍵字搜尋商品
-
-商品分類篩選
-
-商品卡片模式呈現（含圖片 / 價格 / 庫存）
-
-支援後端分頁（limit / offset）
+- 瀏覽商品列表
+- 關鍵字搜尋商品
+- 商品分類篩選
+- 商品卡片模式呈現（含圖片 / 價格 / 庫存）
+- 支援後端分頁（limit / offset）
 
 🔹 會員模組
-註冊帳號 /users/register
-登入 /users/login
-
-登入後會紀錄：
-- userId
-- email
-
-用 localStorage 保留登入狀態
+- 註冊帳號 /users/register
+- 登入 /users/login
+- 登入後會紀錄：
+  - userId
+  - email
+- 用 localStorage 保留登入狀態
 
 🔹 訂單模組
-查詢使用者的所有訂單 /users/{userId}/orders
-訂單卡片式呈現：
-- 訂單編號
-- 訂單時間
-- 訂單金額
-- 訂單商品明細（名稱 / 數量 / 小計）
+
+- 查詢使用者的所有訂單 /users/{userId}/orders
+- 訂單卡片式呈現：
+  - 訂單編號
+  - 訂單時間
+  - 訂單金額
+  - 訂單商品明細（名稱 / 數量 / 小計）
 - 支援分頁
 
 
