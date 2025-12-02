@@ -1,6 +1,8 @@
+// src/pages/ProductListPage.tsx
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../api/products";
 import type { Product, ProductCategory } from "../api/types";
+import "./ProductListPage.css";
 
 const CATEGORY_OPTIONS: { label: string; value?: ProductCategory }[] = [
   { label: "全部商品", value: undefined },
@@ -34,13 +36,11 @@ function ProductListPage() {
           category,
         });
 
-        // 後端如果直接回傳陣列 [ {..}, {..} ]
         if (Array.isArray(data)) {
           setProducts(data as Product[]);
           return;
         }
 
-        // 如果未來後端改成 { results: [...] }，也能支援
         if (data && Array.isArray(data.results)) {
           setProducts(data.results as Product[]);
           return;
@@ -58,104 +58,104 @@ function ProductListPage() {
     load();
   }, [search, category]);
 
-  return (
-    <div style={{ padding: 16 }}>
-      <h1 style={{ marginBottom: 16 }}>商品列表</h1>
+return (
+  <div className="product-page">
+    <h1 className="product-page__title">商品列表</h1>
 
-      {/* 篩選區 */}
-      <div
-        style={{
-          display: "flex",
-          gap: 16,
-          alignItems: "center",
-          marginBottom: 16,
-          flexWrap: "wrap",
-        }}
-      >
-        <input
-          placeholder="輸入關鍵字搜尋商品名稱"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ width: 260, padding: "6px 8px" }}
-        />
-
-        <select
-          value={category ?? ""}
-          onChange={(e) =>
-            setCategory(
-              e.target.value ? (e.target.value as ProductCategory) : undefined
-            )
-          }
-          style={{ padding: "6px 8px" }}
-        >
-          {CATEGORY_OPTIONS.map((c) => (
-            <option key={c.label} value={c.value ?? ""}>
-              {c.label}
-            </option>
-          ))}
-        </select>
+    <div className="product-page__layout">
+      {/* 🧱 左側分類側邊欄 */}
+      <aside className="product-page__sidebar">
+        <h3 className="product-page__sidebar-title">商品分類</h3>
+        <ul className="product-page__category-list">
+          {CATEGORY_OPTIONS.map((c) => {
+            const isActive =
+              category === c.value || (!category && c.value === undefined);
+            return (
+              <li key={c.label}>
+                <button
+                  type="button"
+                  className={
+                    "product-page__category-btn" +
+                    (isActive ? " product-page__category-btn--active" : "")
+                  }
+                  onClick={() => setCategory(c.value)}
+                >
+                  {c.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
 
         {!loading && !error && (
-          <span style={{ fontSize: 14, color: "#666" }}>
+          <div className="product-page__summary">
             共 {products.length} 項商品
-          </span>
+          </div>
         )}
-      </div>
+      </aside>
 
-      {/* 狀態顯示 */}
-      {loading && <div>商品載入中...</div>}
-      {error && <div style={{ color: "red" }}>{error}</div>}
-
-      {/* 商品表格 */}
-      {!loading && !error && (
-        <div>
-          <h3 style={{ marginBottom: 8 }}>商品清單（表格版）</h3>
-
-          {products.length === 0 ? (
-            <div>目前沒有商品資料。</div>
-          ) : (
-            <table
-              style={{
-                width: "100%",
-                borderCollapse: "collapse",
-                fontSize: 14,
-              }}
-            >
-              <thead>
-                <tr>
-                  <th style={thStyle}>名稱</th>
-                  <th style={thStyle}>分類</th>
-                  <th style={thStyle}>價格</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((p) => (
-                  <tr key={p.productId}>
-                    <td style={tdStyle}>{p.productName}</td>
-                    <td style={tdStyle}>{p.category}</td>
-                    <td style={tdStyle}>NT$ {p.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+      {/* 📦 右側商品列表 */}
+      <section className="product-page__main">
+        {/* 🔍 搜尋列：放在主內容上方，靠左，寬度約兩張卡片 */}
+        <div className="product-page__search-row">
+          <div className="product-page__search-box">
+            <span className="product-page__search-icon">🔍</span>
+            <input
+              className="product-page__search-input"
+              placeholder="輸入關鍵字搜尋商品名稱"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </div>
-      )}
+
+        {loading && <div>商品載入中...</div>}
+        {error && <div style={{ color: "red" }}>{error}</div>}
+
+        {!loading && !error && (
+          <>
+            {products.length === 0 ? (
+              <div>目前沒有商品資料。</div>
+            ) : (
+              <div className="product-page__grid">
+                {products.map((p) => (
+                  <div key={p.productId} className="product-card">
+                    {p.imageUrl && (
+                      <img
+                        src={p.imageUrl}
+                        alt={p.productName}
+                        className="product-card__image"
+                      />
+                    )}
+
+                    <div className="product-card__body">
+                      <div className="product-card__name">
+                        {p.productName}
+                      </div>
+                      <div className="product-card__category">
+                        分類：{p.category}
+                      </div>
+
+                      <div className="product-card__footer">
+                        <div className="product-card__price">
+                          NT$ {p.price}
+                        </div>
+                        <button className="btn-primary product-card__btn">
+                          加入購物車
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </section>
     </div>
-  );
+  </div>
+);
+
 }
-
-// 簡單的表頭 / 儲存格樣式
-const thStyle = {
-  borderBottom: "1px solid #ddd",
-  padding: "8px 6px",
-  textAlign: "left" as const,
-  backgroundColor: "#fafafa",
-};
-
-const tdStyle = {
-  borderBottom: "1px solid #eee",
-  padding: "8px 6px",
-};
 
 export default ProductListPage;

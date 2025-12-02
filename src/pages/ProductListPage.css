@@ -1,0 +1,193 @@
+/* 整體頁面 */
+.product-page {
+  padding: 16px;
+}
+
+.product-page__title {
+  margin: 0 0 12px;
+}
+
+/* 🔍 搜尋列：放在主內容區，靠左對齊商品卡片 */
+.product-page__search-row {
+  margin-bottom: 16px;
+}
+
+/* 搜尋框外層容器：寬度大約等於兩張卡片 + gap */
+.product-page__search-box {
+  width: 100%;
+  max-width: 460px; /* 兩張卡片（2x220）+ 間距大約 20px */
+  background-color: #f9fafb;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb; /* 很淡的灰線 */
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+/* 放大鏡 icon */
+.product-page__search-icon {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* 內部 input：拿掉邊線，讓邊框由外層控制 */
+.product-page__search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.product-page__search-input::placeholder {
+  color: #9ca3af;
+}
+
+.product-page__search-input:focus {
+  /* 不直接畫線，由外層加光暈 */
+}
+
+/* 聚焦時讓整個 search box 有一點柔光 */
+.product-page__search-box:focus-within {
+  background-color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+}
+
+/* 主版面：左側側邊欄 + 右側商品區 */
+.product-page__layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+}
+
+/* 🧱 左側分類側邊欄 */
+.product-page__sidebar {
+  background-color: var(--surface, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px;
+  box-shadow: var(--shadow-soft, 0 10px 24px rgba(0, 0, 0, 0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-page__sidebar-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.product-page__category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.product-page__category-btn {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text-muted, #6b7280);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.product-page__category-btn:hover {
+  background-color: #f3f4f6;
+  color: var(--text-main, #111827);
+}
+
+.product-page__category-btn--active {
+  background-color: rgba(255, 107, 53, 0.1);
+  color: var(--primary, #ff6b35);
+  font-weight: 600;
+}
+
+.product-page__summary {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-muted, #6b7280);
+}
+
+/* 📦 右側商品列表區 */
+.product-page__main {
+  min-height: 200px;
+}
+
+/* 商品卡片 grid */
+.product-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* 商品卡片 */
+.product-card {
+  background-color: var(--surface, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-soft, 0 10px 24px rgba(0, 0, 0, 0.06));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.product-card__body {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.product-card__name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.product-card__category {
+  font-size: 12px;
+  color: var(--text-muted, #6b7280);
+}
+
+.product-card__footer {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-card__price {
+  font-weight: 700;
+  color: var(--primary, #ff6b35);
+}
+
+.product-card__btn {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+/* RWD：螢幕窄時側欄改到上面 */
+@media (max-width: 768px) {
+  .product-page__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page__sidebar {
+    order: -1;
+  }
+}

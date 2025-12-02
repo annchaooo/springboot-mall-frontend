@@ -1,0 +1,84 @@
+/* src/components/Header.css */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header__logo {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+}
+
+.header__nav {
+  display: flex;
+  gap: 16px;
+}
+
+.header__link {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.header__link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--text-main);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header__user {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.header__btn-primary,
+.header__btn-outline {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.header__btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.header__btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.header__btn-outline {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.header__btn-outline:hover {
+  background-color: rgba(255, 107, 53, 0.08);
+}

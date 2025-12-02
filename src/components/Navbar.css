@@ -1,0 +1,101 @@
+/* src/components/Navbar.css */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.navbar__left {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar__logo {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+}
+
+.navbar__center {
+  display: flex;
+  gap: 16px;
+}
+
+.navbar__link {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.navbar__link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-main);
+}
+
+.navbar__link--primary {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar__search {
+  background-color: #f3f4f6;
+  border-radius: 999px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  width: 160px;
+}
+
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar__user-email {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* 簡單 RWD：螢幕窄時收斂 navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .navbar__center {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar__search {
+    display: none;
+  }
+}

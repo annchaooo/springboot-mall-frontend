@@ -1,48 +1,16 @@
-/* 導入品牌樣式，這是你自己新增的 theme.css */
-@import "./styles/theme.css";
+/* src/index.css 只做 reset + 佈局 */
+@import "./styles/globals.css";
 
-/* 基礎設定 */
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  font-weight: 400;
-
-  color: var(--color-text-main);
-  background-color: #ffffff; /* 主背景：白色 */
-
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
+html, body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  font-family: system-ui, "Noto Sans TC", sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
 }
 
-/* 標題 */
-h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-/* 連結 */
-a {
-  font-weight: 500;
-  color: var(--color-brand-orange);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* 按鈕（可之後再細調） */
-button {
-  border-radius: 8px;
-  border: none;
-  padding: 8px 14px;
-  font-size: 1rem;
-  cursor: pointer;
+.app-root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 40px;
 }
